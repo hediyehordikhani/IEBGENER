@@ -1,0 +1,20 @@
+
+//RUNSTATS JOB REGION=0K,NOTIFY=DBKIZO1,
+//             MSGCLASS=T,
+//             CLASS=A
+//***********************************
+    GENERATE JOB, RUNSTATS UTILITY
+//***********************************
+//RUNSTAT EXEC DSNUPROC,SYSTEM=DSNT,
+//             LIB='DSNA10.SDSNLOAD',
+//             UID=''
+//RNPRINT DD SYSOUT=*
+//STPRINT DD DUMMY
+//DSNUPROC.SYSIN DD *
+RUNSTATS TABLESPACE TESTZO1.TSTEST1
+INDEX
+  (
+   ALL
+   )
+   SHRLEVEL CHANGE
+/*
