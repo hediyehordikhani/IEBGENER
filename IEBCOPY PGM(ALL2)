@@ -1,0 +1,10 @@
+
+//JOBNAME JOB ,'ZEINAB ORDIKHANI',NOTIFY=DBKIZO1                        
+//STEP1 EXEC PGM=IEBCOPY                                                
+//SYSPRINT DD SYSOUT=* 3                                                
+//OUT1 DD DSN=DBKIZO1.TEST.TST,DISP=(NEW,CATLG,DELETE),                 
+//        SPACE=(TRK,(5,1,2))                                           
+//IN1 DD DSN=DBKIZO1.JCL.T1,DISP=SHR                                    
+//SYSIN DD *                                                            
+ COPY OUTDD=OUT1                                                        
+      INDD=IN1    
