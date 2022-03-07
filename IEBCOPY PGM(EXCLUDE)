@@ -1,0 +1,8 @@
+//JOBNAME JOB ,'ZEINAB ORIKHANI',NOTIFY=DBKIZO1                         
+//STEP1 EXEC PGM=IEBCOPY                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT2 DD DSN=DBKIZO1.JCL.TRAIN,DISP=SHR                             
+//SYSOUT1 DD DSN=DBKIZO1.JCL.T1,DISP=SHR                                
+//SYSIN DD *                                                            
+  COPY INDD=SYSOUT1,OUTDD=SYSOUT2                                       
+    EXCLUDE MEMBER=(IEBCOPY,IEBCOPY2,IEBCOPY3)                          
