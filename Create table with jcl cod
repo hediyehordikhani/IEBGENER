@@ -1,0 +1,50 @@
+
+//JOBNAME  JOB  NOTIFY=DBKIZO1                                          
+//****************************************                              
+//* CREATE DATASET USING IEFBR14 UTILITY                                
+//****************************************                              
+//DELET1  EXEC PGM=IEFBR14                                              
+//DELETE    DD DSN=DBKIZO1.TEST.DS1,                                    
+//             DISP=(MOD,DELETE,DELETE),SPACE=(TRK,(1,1))               
+//****************************************                              
+//STEP1    EXEC PGM=IEFBR14                                             
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+//SYSDUMP  DD SYSOUT=*                                                  
+//DD1      DD DSN=DBKIZO1.TEST.DS1,                                     
+//            DCB=(RECFM=FB,LRECL=80),SPACE=(TRK,(5,5),RLSE),           
+//            BLKSIZE=800,                                              
+//            DISP=(NEW,CATLG,CATLG)                                    
+//****************************************                              
+//* COPY SYNTAX USING IEBGENER UTILITY                                  
+//****************************************                              
+//*--------------------------------------------------------------------
+//STEP2  EXEC PGM=IEBGENER                                              
+//SYSIN  DD DUMMY                                                       
+//SYSPRINT DD SYSOUT=X                                                  
+//SYSUT1 DD *                                                           
+ SET CURRENT SQLID ='DBKIZO1';                                          
+CREATE TABLE DB2021.TB2021                                              
+(                                                                       
+ ID     INT  NOT NULL PRIMARY KEY,                                      
+ NAME   VARCHAR(6),                                                     
+ TIME   TIMESTAMP,                                                      
+ RESUME CLOB,                                                           
+ SALARY DECIMAL(4)                                                      
+ )                                                                      
+  IN DB2021.TS2021;                                                     
+//SYSUT2   DD DSN=DBKIZO1.TEST.DS1,DISP=SHR                             
+//****************************************                              
+//* CREATE TABLE                                                        
+//****************************************                              
+//STEP3     EXEC PGM=IKJEFT01                                           
+//STEPLIB   DD DISP=SHR,DSN=DSNA10.SDSNLOAD                             
+//SYSTSPRT  DD SYSOUT=*                                                 
+//SYSPRINT  DD SYSOUT=*                                                 
+//SYSTSIN   DD *                                                        
+DSN SYSTEM(DSNT)                                                        
+   RUN PROGRAM(DSNTEP2) PLAN(DSNTEP10) -                                
+      LIB('DSNA10.DSNT.RUNLIB.LOAD')                                    
+END                                                                     
+//SYSPRINT  DD SYSOUT=*                                                 
+//SYSIN     DD DISP=SHR,DSN=DBKIZO1.TEST.DS1                            
