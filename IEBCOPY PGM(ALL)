@@ -1,0 +1,9 @@
+//JOBNAME JOB ,'ZEINAB ORDIKHANI',NOTIFY=DBKIZO1                        
+//STEP1 EXEC PGM=IEBCOPY                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT1 DD DSN=DBKIZO1.TRAIN.JCLC,                                    
+//           DISP=SHR                                                   
+//SYSOUT2 DD DSN=DBKIZO1.JCL.TRAIN2,                                    
+//           DISP=(NEW,KEEP),SPACE=(TRK,(5,1,2)),                       
+//           DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)                        
+//SYSIN DD DUMMY                                                        
