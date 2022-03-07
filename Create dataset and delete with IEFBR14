@@ -1,0 +1,18 @@
+
+//JOBNAME JOB ,'ZEINAB ORDIKHANI',NOTIFY=DBKIZO1                        
+//*****************                                                     
+//*DELETE DATASET                                                       
+//*****************                                                     
+//STEP1 EXEC PGM=IEFBR14                                                
+//DELETE DD DSN=DBKIZO1.IEFBR14.TEST,                                   
+//          DISP=(OLD,DELETE,DELETE)                                    
+//******************                                                    
+//* CREATE DATASET                                                      
+//******************                                                    
+//STEP2 EXEC PGM=IEFBR14                                                
+//CREATE DD DSN=DBKIZO1.IEFBR14.TEST,                                   
+//          DISP=(NEW,CATLG,DELETE),                                    
+//          SPACE=(TRK,(1,1),RLSE),                                     
+//          DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)                         
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT DD SYSOUT=*  
